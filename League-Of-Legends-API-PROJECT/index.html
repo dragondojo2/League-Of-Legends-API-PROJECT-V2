@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://kit.fontawesome.com/c2ea2e0f41.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="icon" href="img/logo.png">
+    </link>
+    <title>League Of Legends</title>
+</head>
+
+<body ng-controller="angularController">
+    <div class="text-center pt-5"><img class="logo" src="img/logocerta.png"></div>
+
+    <div class="searchbarContainer">
+        <div class="search-box">
+            <input id="search" type="search" ng-model="champion" placeholder="Search your champion here..." />
+            <button type="submit" class="search-btn" ng-click="search(champion)"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+
+    <div class="container" id="CardGlobal" style="color: white;">
+        <div class="row justify-content-center">
+            <!-- Card 1 -->
+            <div class="col-md-12 card-container justify-content-center">
+                <div class="card-flip" id="test1">
+                    <!-- Card 1 Front -->
+                    <div class="card front block shadow" style="border-color: #dcbf59;">
+                        <div class="cover remove"></div>
+                        <img class="card-img-top" ng-src={{splash}} alt="Card image">
+                        <div class="card-block card-img-overlay">
+                            <div class="card-header">
+                                <div class="d-flex viewBtn">
+                                    <button type="button" class="btn" id="btn-circle" ng-click="viewOn()" ng-hide="displayOn">
+                                        <i class="fa fa-eye" style="color: #dcbf59;"></i>
+                                    </button>
+                                    <button type="button" class="btn" id="btn-circle" ng-click="viewOff()" ng-hide="displayOff">
+                                        <i class="fa fa-eye-slash" style="color: #dcbf59;"></i>
+                                    </button>
+                                </div>
+                                <div class="championName remove">
+                                    {{id}}
+                                </div>
+                            </div>
+                            <div class="card-text remove">
+                                {{lore}}
+                            </div>
+                            <div class="card-footer d-flex justify-content-between">
+                                <button type="button" class="btn" id="btn-rectangle" ng-click="skinPrev()">
+                                    <i class="fa fa-angle-left" style="color: #dcbf59;"></i>
+                                </button>
+                                <button type="button" class="btn" id="btn-circle" ng-click="flipForBack()">
+                                    <i class="fa fa-refresh" style="color: #dcbf59;"></i>
+                                </button>
+                                <button type="button" class="btn" id="btn-rectangle" ng-click="skinNext()">
+                                    <i class="fa fa-angle-right" style="color: #dcbf59;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card 1 Front -->
+
+                    <!-- Card 1 Back -->
+                    <div class="card back block shadow" style="border-color: #dcbf59;">
+                        <!-- <div class="back-Background"></div> -->
+                        <img class="card-img-top1" ng-src="{{splash}}" alt="Card image">
+                        <div class="card-block card-img-overlay text-center">
+                            <!-- <div class="card-header">{{name}}</div> -->
+                            <div class="card-text2 m-0">
+                                <div>
+                                    <div class="d-flex viewBtn">
+                                        <button type="button" class="btn justify-content-start" id="btn-circle">
+                                            <i class="fa fa-volume-up" style="color: #dcbf59;"></i>
+                                        </button>
+                                    </div>
+                                    <div class="row back-item mt-5" id="iconBorder">
+                                        <img id="championIcon" ng-src={{icon}}>
+                                    </div>
+                                </div>
+                                <div class="row back-item containerIcon" style="background-color: pink;">
+                                    <table class="table table-sm table-borderless" style="color: white;">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <img class="iconStats" src="img/icons/Attack_damage_icon.png">
+                                                </th>
+                                                <td>{{attackDamage}}</td>
+                                                <th><img class="iconStats" src="img/icons/Range_icon.png"></th>
+                                                <td>{{range}}</td>
+                                                <th><img class="iconStats" src="img/icons/Movement_speed_icon.png"></th>
+                                                <td>{{moveS}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" style="border: none;">
+                                                    <img class="iconStats" src="img/icons/Health_icon.png">
+                                                </th>
+                                                <td>{{life}}</td>
+                                                <th><img class="iconStats" src="img/icons/Mana_icon.png">
+                                                </th>
+                                                <td>{{mana}}</td>
+                                                <th><img class="iconStats" src="img/icons/Armor_icon.png"></th>
+                                                <td>{{armor}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row"><img class="iconStats"
+                                                        src="img/icons/Health_regeneration_icon.png"></th>
+                                                <td>{{lifeRegen}}</td>
+                                                <th><img class="iconStats" src="img/icons/Mana_regeneration_icon.png">
+                                                </th>
+                                                <td>{{manaRegen}}</td>
+                                                <th><img class="iconStats" src="img/icons/Magic_resistance_icon.png">
+                                                </th>
+                                                <td>{{magicResistence}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row back-item">
+                                    <div class="container text-center">
+                                        <div class="row justify-content-center mb-1">
+                                            <img class="skillImg" ng-src="{{skillP}}">
+                                        </div>
+                                        <div class="row flex-gap">
+                                            <div class="col-md-4 p-1">
+                                                <img class="skillImg" ng-src="{{skillQ}}">
+                                            </div>
+                                            <div class="col-md-4 p-1">
+                                                <img class="skillImg" ng-src="{{skillW}}">
+                                            </div>
+                                            <div class="col-md-4 p-1">
+                                                <img class="skillImg" ng-src="{{skillE}}">
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center mt-1">
+                                            <img class="skillImg" ng-src="{{skillR}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="button" class="btn" id="btn-circle" ng-click="flipForFront()">
+                                    <i class="fa fa-refresh" style="color: #dcbf59;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Card 1 Back -->
+                </div>
+            </div>
+            <!-- End Card 1 -->
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h6>About</h6>
+                    <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative to help the
+                        upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or
+                        snippets as the code wants to be simple. We will help programmers build up concepts in different
+                        programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android,
+                        SQL and Algorithm.</p>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h6>Categories</h6>
+                    <ul class="footer-links">
+                        <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
+                        <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
+                        <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
+                        <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
+                        <li><a href="http://scanfcode.com/category/android/">Android</a></li>
+                        <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <h6>Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="http://scanfcode.com/about/">About Us</a></li>
+                        <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+                        <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+                        <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+                        <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by
+                        <a href="#">Scanfcode</a>.
+                    </p>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <ul class="social-icons">
+                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="angular-1.8.0/angular.min.js"></script>
+<script type="text/javascript" src="jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="script.js"></script>
+
+</html>
