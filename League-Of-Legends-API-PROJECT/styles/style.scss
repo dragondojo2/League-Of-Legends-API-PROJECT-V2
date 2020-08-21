@@ -212,11 +212,12 @@ input[type="search"] {
   padding: 0px 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #dcbf59;
+  color: black;
 }
 
 ::placeholder {
-  color: $black;
+  opacity: 35%;
+  color: #383a3f;
   font-size: 0.8em;
 }
 
@@ -522,13 +523,82 @@ td{
   margin-left: 65px !important;
   margin-right: 90px !important;
 }
+
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+iframe{
+  width: 99%;
+  border: 1px solid black !important;
+  background-color: yellow !important;
+  outline: 3px solid $yellow !important;
+  outline-offset: -1px !important;
+}
+
+.modal-content{
+  background-color: #2d3436;
+  background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
+  color: white;
+}
+
+.modal{
+  width: 100vh;
+  padding: 0 !important;
+  background: center no-repeat;
+  background-size: cover;
+  background-image: url("../img/Aatrox_0.jpg");
+}
+
+.profilePicture{
+  width: 96px;
+  height: 96px;
+}
+
+#tabbleFooter{
+  margin: 0 !important;
+}
+
+#removeBg{
+  border: none;
+  background: none !important;
+  background-color: transparent !important;
+}
+
+.iconSocial2{
+  width: 50px;
+  height: 50px;
+  filter: saturate(6);
+  padding-right: 15px;
+  padding-bottom: 15px;
+}
+
+.socialText{
+  padding-left: 25px !important;
+}
+
+.iconsFooter{
+  width: 60px;
+  height: 60px;
+}
+
+.thFooter{
+  // padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
 /* card-end */
 
 /* footer-start */
 
 .site-footer {
   background-color: #26272b;
-  padding: 45px 0 20px;
+  padding: 15px 0 20px;
   font-size: 15px;
   line-height: 24px;
   color: #737373;

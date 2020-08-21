@@ -31,14 +31,16 @@
                     <!-- Card 1 Front -->
                     <div class="card front block shadow" style="border-color: #dcbf59;">
                         <div class="cover remove"></div>
-                        <img class="card-img-top" ng-src={{splash}} alt="Card image">
+                    <img class="card-img-top" ng-src={{splash||'img/Vayne_0.jpg'}} id="placeHolderImg" on-error-src="img/Vayne_0.jpg">
                         <div class="card-block card-img-overlay">
                             <div class="card-header">
                                 <div class="d-flex viewBtn">
-                                    <button type="button" class="btn" id="btn-circle" ng-click="viewOn()" ng-hide="displayOn">
+                                    <button type="button" class="btn" id="btn-circle" ng-click="viewOn()"
+                                        ng-hide="displayOn">
                                         <i class="fa fa-eye" style="color: #dcbf59;"></i>
                                     </button>
-                                    <button type="button" class="btn" id="btn-circle" ng-click="viewOff()" ng-hide="displayOff">
+                                    <button type="button" class="btn" id="btn-circle" ng-click="viewOff()"
+                                        ng-hide="displayOff">
                                         <i class="fa fa-eye-slash" style="color: #dcbf59;"></i>
                                     </button>
                                 </div>
@@ -67,7 +69,7 @@
                     <!-- Card 1 Back -->
                     <div class="card back block shadow" style="border-color: #dcbf59;">
                         <!-- <div class="back-Background"></div> -->
-                        <img class="card-img-top1" ng-src="{{splash}}" alt="Card image">
+                        <img class="card-img-top1" ng-src="{{splash||'img/Vayne_0.jpg'}}" alt="Card image">
                         <div class="card-block card-img-overlay text-center">
                             <!-- <div class="card-header">{{name}}</div> -->
                             <div class="card-text2 m-0">
@@ -78,7 +80,7 @@
                                         </button>
                                     </div>
                                     <div class="row back-item mt-5" id="iconBorder">
-                                        <img id="championIcon" ng-src={{icon}}>
+                                        <img id="championIcon" ng-src={{icon||'img/Vayne_0.jpg'}}>
                                     </div>
                                 </div>
                                 <div class="row back-item containerIcon" style="background-color: pink;">
@@ -88,33 +90,33 @@
                                                 <th scope="row">
                                                     <img class="iconStats" src="img/icons/Attack_damage_icon.png">
                                                 </th>
-                                                <td>{{attackDamage}}</td>
+                                                <td>{{attackDamage||'??'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Range_icon.png"></th>
-                                                <td>{{range}}</td>
+                                                <td>{{range||'??'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Movement_speed_icon.png"></th>
-                                                <td>{{moveS}}</td>
+                                                <td>{{moveS||'??'}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="border: none;">
                                                     <img class="iconStats" src="img/icons/Health_icon.png">
                                                 </th>
-                                                <td>{{life}}</td>
+                                                <td>{{life||'??'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Mana_icon.png">
                                                 </th>
-                                                <td>{{mana}}</td>
+                                                <td>{{mana||'??'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Armor_icon.png"></th>
-                                                <td>{{armor}}</td>
+                                                <td>{{armor||'??'}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row"><img class="iconStats"
                                                         src="img/icons/Health_regeneration_icon.png"></th>
-                                                <td>{{lifeRegen}}</td>
+                                                <td>{{lifeRegen||'??'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Mana_regeneration_icon.png">
                                                 </th>
-                                                <td>{{manaRegen}}</td>
+                                                <td>{{manaRegen||'??'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Magic_resistance_icon.png">
                                                 </th>
-                                                <td>{{magicResistence}}</td>
+                                                <td>{{magicResistence||'??'}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -122,21 +124,31 @@
                                 <div class="row back-item">
                                     <div class="container text-center">
                                         <div class="row justify-content-center mb-1">
-                                            <img class="skillImg" ng-src="{{skillP}}">
+                                            <button class="skillButton" data-toggle="modal" data-target="#exampleModal">
+                                                <img class="skillImg" ng-src="{{skillP||'img/Vayne_0.jpg'}}">
+                                            </button>
                                         </div>
                                         <div class="row flex-gap">
                                             <div class="col-md-4 p-1">
-                                                <img class="skillImg" ng-src="{{skillQ}}">
+                                                <button class="skillButton" data-toggle="modal" data-target="#exampleModal">
+                                                    <img class="skillImg" ng-src="{{skillQ||'img/Vayne_0.jpg'}}">
+                                                </button>
                                             </div>
                                             <div class="col-md-4 p-1">
-                                                <img class="skillImg" ng-src="{{skillW}}">
+                                                <button class="skillButton" data-toggle="modal" data-target="#exampleModal">
+                                                    <img class="skillImg" ng-src="{{skillW||'img/Vayne_0.jpg'}}">
+                                                </button>
                                             </div>
                                             <div class="col-md-4 p-1">
-                                                <img class="skillImg" ng-src="{{skillE}}">
+                                                <button class="skillButton" data-toggle="modal" data-target="#exampleModal">
+                                                    <img class="skillImg" ng-src="{{skillE||'img/Vayne_0.jpg'}}">
+                                                </button>
                                             </div>
                                         </div>
                                         <div class="row justify-content-center mt-1">
-                                            <img class="skillImg" ng-src="{{skillR}}">
+                                            <button class="skillButton" data-toggle="modal" data-target="#exampleModal">
+                                                <img class="skillImg" ng-src="{{skillR||'img/Vayne_0.jpg'}}">
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -155,69 +167,180 @@
         </div>
     </div>
 
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <h6>About</h6>
-                    <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative to help the
-                        upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or
-                        snippets as the code wants to be simple. We will help programmers build up concepts in different
-                        programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android,
-                        SQL and Algorithm.</p>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="display: flex; flex-direction: row-reverse;  border: none;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="margin: 0 auto;">NOME DA SKILL</h5>
+                    <button type="button" class="btn m-0 p-0" data-dismiss="modal" aria-label="Close" id="btn-circle" style="position: absolute;">
+                        <i class="fa fa-times" aria-hidden="true" style="color: #dcbf59;"></i>
+                    </button>
                 </div>
-
-                <div class="col-xs-6 col-md-3">
-                    <h6>Categories</h6>
-                    <ul class="footer-links">
-                        <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-                        <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-                        <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-                        <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-                        <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-                        <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-                    </ul>
+                <div class="modal-body pt-3">
+                    <iframe width="100%" height="315" src="https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0142/ability_0142_W1.webm" frameborder="0" 
+                    allow="encrypted-media" allowfullscreen></iframe>
                 </div>
-
-                <div class="col-xs-6 col-md-3">
-                    <h6>Quick Links</h6>
-                    <ul class="footer-links">
-                        <li><a href="http://scanfcode.com/about/">About Us</a></li>
-                        <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-                        <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-                        <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-                        <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
-                    </ul>
+                <div class="modal-footer text-center" style=" border: none;">
+                    <div class="skillInfo" style="margin: 0 auto;">
+                        <img class="skillImg" ng-src="{{skillP||'img/Vayne_0.jpg'}}">
+                    </div>
+                    <div>
+                        {{stripedHtml}}
+                    </div>
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
-            <hr>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="profilePicture" src="img/105080.png">
+                        </div>
+                        <div class="col-md-4">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at pretium dui. Sed eros purus, ullamcorper sit amet nisi id, tristique malesuada ligula. Aliquam faucibus quis augue ac eleifend. Class.
+                        </div>
+                        <div class="col-md-4" style="border-right: 1px solid;">
+                            <table class="table table-sm table-borderless" id="tabbleFooter" style="color: white;">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="thFooter">
+                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_whatsapp_764566.png">
+                                        </th>
+                                        <td>Whatssap</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="thFooter">
+                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_instagram_six_black_107100.png">
+                                        </th>
+                                        <td>Instagram</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="thFooter">
+                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_facebook_six_black_107121.png">
+                                        </th>
+                                        <td>Facebook</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="thFooter">
+                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_linkedin_six_black_107094.png">
+                                        </th>
+                                        <td>Linkedin</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="thFooter">
+                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_github_six_black_107112.png">
+                                        <td>GitHub</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <!-- <ul class="list-group list-group-flush" style="color: white;">
+                                <li class="list-group-item" id="removeBg"> <span> <img class="iconStats" src="img/icons/Attack_damage_icon.png"> </span>Facebook</li>
+                                <li class="list-group-item" id="removeBg"> <span> <img class="iconStats" src="img/icons/Attack_damage_icon.png"> </span>Twitter</li>
+                                <li class="list-group-item" id="removeBg"> <span> <img class="iconStats" src="img/icons/Attack_damage_icon.png"> </span>Instagram</li>
+                                <li class="list-group-item" id="removeBg"> <span> <img class="iconStats" src="img/icons/Attack_damage_icon.png"> </span>Linkedin</li>
+                                <li class="list-group-item" id="removeBg"> <span> <img class="iconStats" src="img/icons/Attack_damage_icon.png"> </span>GitHub</li>
+                            </ul> -->
+                            <table class="table table-sm table-borderless" id="tabbleFooter" style="color: white;">
+                                <tbody>
+                                    <tr>
+                                        <td class="socialText">Whatssap</td>
+                                        <th scope="row" class="thFooter">
+                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_whatsapp_764566.png">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="socialText">Instagram</td>
+                                        <th scope="row" class="thFooter">
+                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_instagram_six_black_107100.png">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="socialText">Facebook</td>
+                                        <th scope="row" class="thFooter">
+                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_facebook_six_black_107121.png">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="socialText">Linkedin</td>
+                                        <th scope="row" class="thFooter">
+                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_linkedin_six_black_107094.png">
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="socialText">GitHub</td>
+                                        <th scope="row" class="thFooter">
+                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_github_six_black_107112.png">
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at pretium dui. Sed eros purus, ullamcorper sit amet nisi id, tristique malesuada ligula. Aliquam faucibus quis augue ac eleifend. Class.
+                        </div>
+                        <div class="col-md-4">
+                            <img class="profilePicture" src="img/105080.png">
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+        <div class="container pt-3 mb-3">
+            <div class="row">
+                <div style="margin: 0 auto;">
+                    © 2020 Glauco Lustosa & Joao Gabriel
+                </div>
+            </div>
         </div>
         <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-sm-6 col-xs-12">
-                    <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by
-                        <a href="#">Scanfcode</a>.
-                    </p>
+            <div class="row" style="margin: 0 100px;">
+                <div class="col-md-2">
+                    <img class="iconsFooter" src="img/iconsFooter/html-logo.png">
                 </div>
-
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <ul class="social-icons">
-                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                    </ul>
+                <div class="col-md-2">
+                    <img class="iconsFooter" src="img/iconsFooter/sass-logo.png">
+                </div>
+                <div class="col-md-2">
+                    <img class="iconsFooter" src="img/iconsFooter/js-logo.png">
+                </div>
+                <div class="col-md-2">
+                    <img class="iconsFooter" src="img/iconsFooter/bootstrap-logo.png">
+                </div>
+                <div class="col-md-2">
+                    <img class="iconsFooter" src="img/iconsFooter/api-logo.png">
+                </div>
+                <div class="col-md-2">
+                    <img class="iconsFooter" src="img/iconsFooter/angularJS-logo.png">
                 </div>
             </div>
         </div>
     </footer>
 </body>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="angular-1.8.0/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"></script>
-<script type="text/javascript" src="angular-1.8.0/angular.min.js"></script>
-<script type="text/javascript" src="jquery/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="script.js"></script>
 
 </html>

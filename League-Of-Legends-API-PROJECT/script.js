@@ -5,7 +5,24 @@ app.controller('angularController', function ($scope, $http) {
     $scope.displayOn = false
     $scope.displayOff = true
     let count = 0
+    $scope.total = 0
 
+    function padLeft(id, str){
+        $scope.total = Array(4-String(id).length+1).join(str||'0')+id;
+        console.log($scope.total);
+    }
+
+    app.directive('onErrorSrc', function() {
+        return {
+            link: function(scope, element, attrs) {
+              element.bind('error', function() {
+                if (attrs.src != attrs.onErrorSrc) {
+                  attrs.$set('src', attrs.onErrorSrc);
+                }
+              });
+            }
+        }
+    });
 
     $scope.flipForFront = function () {
         document.getElementById('test1').style='transform: rotateY(0deg);'
@@ -35,13 +52,30 @@ app.controller('angularController', function ($scope, $http) {
             method: 'GET',
             url: 'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion/' + champion + '.json'
         }).then(function sucessCallBack(response) {
+            console.log(response);
             $scope.id = response.data.data[champion]["id"]
+            let skinId = response.data.data[champion]["skins"][0]['id']
+            let newIdValue = skinId/1000
+            padLeft(newIdValue)
             $scope.lore = response.data.data[champion]["lore"]
             const skillP = response.data.data[champion]["passive"]["image"]["full"]
             const skillQ = response.data.data[champion]["spells"][0]["image"]["full"]
             const skillW = response.data.data[champion]["spells"][1]["image"]["full"]
             const skillE = response.data.data[champion]["spells"][2]["image"]["full"]
             const skillR = response.data.data[champion]["spells"][3]["image"]["full"]
+            $scope.skillPDesc = response.data.data[champion]["passive"]["description"]
+            $scope.skillQDesc = response.data.data[champion]["spells"][0]["description"]
+            $scope.skillWDesc = response.data.data[champion]["spells"][1]["description"]
+            $scope.skillEDesc = response.data.data[champion]["spells"][2]["description"]
+            $scope.skillRDesc = response.data.data[champion]["spells"][3]["description"]
+            let skillWDescc = $scope.skillWDesc
+            $scope.stripedHtml = skillWDescc.replace(/<[^>]+>/g, '');
+            console.log($scope.stripedHtml);
+            $scope.videoP = "https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0142/ability_0142_W1.webm"
+            $scope.videoQ = 'https://d28xe8vt774jo5.cloudfront.net/champion-abilities/'+ $scope.total +'/ability_'+ $scope.total +'_Q1.webm'
+            $scope.videoW = 'https://d28xe8vt774jo5.cloudfront.net/champion-abilities/'+ $scope.total +'/ability_'+ $scope.total +'_W1.webm'
+            $scope.videoE = 'https://d28xe8vt774jo5.cloudfront.net/champion-abilities/'+ $scope.total +'/ability_'+ $scope.total +'_E1.webm'
+            $scope.videoR = 'https://d28xe8vt774jo5.cloudfront.net/champion-abilities/'+ $scope.total +'/ability_'+ $scope.total +'_R1.webm'
             $scope.attackDamage = response.data.data[champion]["stats"]["attackdamage"]
             $scope.range = response.data.data[champion]["stats"]["attackrange"]
             $scope.moveS  = response.data.data[champion]["stats"]["movespeed"]
@@ -78,6 +112,8 @@ app.controller('angularController', function ($scope, $http) {
                 console.log("count = " + count);
                 $scope.splash = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion + "_" + arrayNormal.num + ".jpg"
             }
+
+            console.log('total total' + $scope.total);
 
         }).then(function errorCallBack(response) {
         
