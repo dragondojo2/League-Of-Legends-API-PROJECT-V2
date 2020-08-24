@@ -2,32 +2,25 @@
 
 @font-face {
   font-family: "aaux";
-  src: url("../fonts/aaux_next_comp_black-webfont.woff2") format("woff2"),
-    url("../fonts/aaux_next_comp_black-webfont.woff") format("woff");
+  src: url("../fonts/aaux_next_comp_black-webfont.woff2") format("woff2"), url("../fonts/aaux_next_comp_black-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "aauxThin";
-  src:
-    url("../fonts/aaux_next_comp_thin-webfont.woff2") format("woff2"),
-    url("../fonts/aaux_next_comp_thin-webfont.woff") format("woff");
+  src: url("../fonts/aaux_next_comp_thin-webfont.woff2") format("woff2"), url("../fonts/aaux_next_comp_thin-webfont.woff") format("woff");
   font-weight: thin;
   font-style: thin;
 }
 @font-face {
   font-family: "aauxRegular";
-  src:
-  url("../fonts/aaux_next_comp_regular-webfont.woff2") format("woff2"),
-  url("../fonts/aaux_next_comp_regular-webfont.woff") format("woff");
+  src: url("../fonts/aaux_next_comp_regular-webfont.woff2") format("woff2"), url("../fonts/aaux_next_comp_regular-webfont.woff") format("woff");
   font-weight: regular;
   font-style: regular;
 }
 @font-face {
   font-family: "aauxBold";
-  src:
-  url("../fonts/aaux_next_comp_bold-webfont.woff2") format("woff2"),
-  url("../fonts/aaux_next_comp_bold-webfont.woff") format("woff");
+  src: url("../fonts/aaux_next_comp_bold-webfont.woff2") format("woff2"), url("../fonts/aaux_next_comp_bold-webfont.woff") format("woff");
   font-weight: bold;
   font-style: bold;
 }
@@ -244,6 +237,78 @@ input[type="search"] {
 
 /* serach-box-end */
 
+/*switch-start*/
+
+.iconFlag{
+  width: 40px;
+  height: 40px;
+}
+
+.switch {
+  margin-top: 6px;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2d7492;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2d7492;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(31px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/*switch-end*/
+
 /* card-start */
 
 .block {
@@ -268,19 +333,7 @@ input[type="search"] {
     left: -2px;
     width: calc(100% + 4px);
     height: calc(100% + 4px);
-    background: linear-gradient(
-      45deg,
-      #fb0094,
-      #0000ff,
-      #00ff00,
-      #ffff00,
-      #ff0000,
-      #fb0094,
-      #0000ff,
-      #00ff00,
-      #ffff00,
-      #ff0000
-    );
+    background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000);
     background-size: 400%;
     z-index: -1;
     animation: shadow 20s linear infinite;
@@ -372,7 +425,6 @@ input[type="search"] {
   perspective: 700px;
 }
 
-
 .card-flip {
   display: grid;
   grid-template: 1fr / 1fr;
@@ -394,7 +446,6 @@ input[type="search"] {
   grid-area: frontAndBack;
   transform: rotateY(-180deg);
 }
-
 
 #btn-circle {
   border-color: $yellow;
@@ -419,12 +470,12 @@ input[type="search"] {
   line-height: 1.42856;
 }
 
-.viewBtn{
+.viewBtn {
   margin-top: 18px;
   position: absolute;
 }
 
-.championName{
+.championName {
   margin: 0 auto;
   width: fit-content;
 }
@@ -438,7 +489,7 @@ input[type="search"] {
 //   border-color: $yellow;
 // }
 
-#championIcon{  
+#championIcon {
   margin: 0 auto !important;
   border: 1px solid black;
   background-color: yellow;
@@ -448,16 +499,16 @@ input[type="search"] {
   height: 100px;
 }
 
-.card-text2{
+.card-text2 {
   padding-right: 20px;
   padding-left: 20px;
-	margin: 0 auto;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
-	flex-direction: column;
+  flex-direction: column;
 }
 
-.back-item{
+.back-item {
   margin-bottom: 20px;
 }
 
@@ -467,18 +518,18 @@ input[type="search"] {
   width: 100% !important;
 }
 
-.containerIcon{
+.containerIcon {
   margin: 5px;
   color: white !important;
   border: none !important;
-  background: none !important; 
+  background: none !important;
 }
 
-.removeBorder{
+.removeBorder {
   border: none !important;
 }
 
-.skillImg{
+.skillImg {
   width: 50px;
   height: 50px;
   border: 1px solid;
@@ -492,7 +543,7 @@ input[type="search"] {
   gap: 0px;
 }
 
-.card-img-top1{
+.card-img-top1 {
   height: 100% !important;
   width: 100% !important;
   filter: blur(8px);
@@ -506,35 +557,37 @@ input[type="search"] {
   width: 100% !important;
 }
 
-.iconStats{
+.iconStats {
   filter: saturate(6);
 }
 
-th{
+th {
   padding-bottom: 10px !important;
 }
 
-td{
+td {
   padding-top: 8px !important;
   float: left;
 }
 
-.table{
+.table {
   margin-left: 65px !important;
   margin-right: 90px !important;
 }
 
-button, input[type="submit"], input[type="reset"] {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
-iframe{
+iframe {
   width: 99%;
   border: 1px solid black !important;
   background-color: yellow !important;
@@ -542,36 +595,35 @@ iframe{
   outline-offset: -1px !important;
 }
 
-.modal-content{
+.modal-content {
   background-color: #2d3436;
   background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
   color: white;
 }
 
-.modal{
+.modal {
   width: 100vh;
   padding: 0 !important;
   background: center no-repeat;
   background-size: cover;
-  background-image: url("../img/Aatrox_0.jpg");
 }
 
-.profilePicture{
-  width: 96px;
-  height: 96px;
+.profilePicture {
+  width: 180px;
+  height: 180px;
 }
 
-#tabbleFooter{
+#tabbleFooter {
   margin: 0 !important;
 }
 
-#removeBg{
+#removeBg {
   border: none;
   background: none !important;
   background-color: transparent !important;
 }
 
-.iconSocial2{
+.iconSocial2 {
   width: 50px;
   height: 50px;
   filter: saturate(6);
@@ -579,18 +631,26 @@ iframe{
   padding-bottom: 15px;
 }
 
-.socialText{
+.socialText {
   padding-left: 25px !important;
 }
 
-.iconsFooter{
+.iconsFooter {
   width: 60px;
   height: 60px;
 }
 
-.thFooter{
+.thFooter {
   // padding-top: 0px !important;
   padding-bottom: 0px !important;
+}
+
+.skillImgModal {
+  width: 50px;
+  height: 50px;
+  border: 1px solid;
+  border-color: $yellow;
+  border-radius: 5px;
 }
 /* card-end */
 

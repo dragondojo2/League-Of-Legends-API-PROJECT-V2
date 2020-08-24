@@ -23,15 +23,23 @@
         </div>
     </div>
 
+    <div class="d-flex justify-content-center" style="display: inline-flex; flex-wrap: wrap; gap: 10px;">
+        <span><img class="iconFlag" src="img/brasil.png"></span>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        <span><img class="iconFlag" src="img/estados-unidos-da-america.png"></span>
+    </div>
     <div class="container" id="CardGlobal" style="color: white;">
         <div class="row justify-content-center">
             <!-- Card 1 -->
             <div class="col-md-12 card-container justify-content-center">
-                <div class="card-flip" id="test1">
+                <div class="card-flip" id="rotate">
                     <!-- Card 1 Front -->
                     <div class="card front block shadow" style="border-color: #dcbf59;">
                         <div class="cover remove"></div>
-                    <img class="card-img-top" ng-src={{splash||'img/Vayne_0.jpg'}} id="placeHolderImg" on-error-src="img/Vayne_0.jpg">
+                    <img class="card-img-top" ng-src={{splash||'img/splashArt-PlaceHolder.png'}} id="placeHolderImg">
                         <div class="card-block card-img-overlay">
                             <div class="card-header">
                                 <div class="d-flex viewBtn">
@@ -69,7 +77,7 @@
                     <!-- Card 1 Back -->
                     <div class="card back block shadow" style="border-color: #dcbf59;">
                         <!-- <div class="back-Background"></div> -->
-                        <img class="card-img-top1" ng-src="{{splash||'img/Vayne_0.jpg'}}" alt="Card image">
+                        <img class="card-img-top1" ng-src="{{splash||'img/splashArt-PlaceHolder.png'}}" alt="Card image">
                         <div class="card-block card-img-overlay text-center">
                             <!-- <div class="card-header">{{name}}</div> -->
                             <div class="card-text2 m-0">
@@ -80,7 +88,7 @@
                                         </button>
                                     </div>
                                     <div class="row back-item mt-5" id="iconBorder">
-                                        <img id="championIcon" ng-src={{icon||'img/Vayne_0.jpg'}}>
+                                        <img id="championIcon" ng-src={{icon||'img/icon-placeHolder.png'}}>
                                     </div>
                                 </div>
                                 <div class="row back-item containerIcon" style="background-color: pink;">
@@ -90,33 +98,33 @@
                                                 <th scope="row">
                                                     <img class="iconStats" src="img/icons/Attack_damage_icon.png">
                                                 </th>
-                                                <td>{{attackDamage||'??'}}</td>
+                                                <td>{{attackDamage||'???'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Range_icon.png"></th>
-                                                <td>{{range||'??'}}</td>
+                                                <td>{{range||'???'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Movement_speed_icon.png"></th>
-                                                <td>{{moveS||'??'}}</td>
+                                                <td>{{moveS||'???'}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row" style="border: none;">
                                                     <img class="iconStats" src="img/icons/Health_icon.png">
                                                 </th>
-                                                <td>{{life||'??'}}</td>
+                                                <td>{{life||'???'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Mana_icon.png">
                                                 </th>
-                                                <td>{{mana||'??'}}</td>
+                                                <td>{{mana||'???'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Armor_icon.png"></th>
-                                                <td>{{armor||'??'}}</td>
+                                                <td>{{armor||'???'}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row"><img class="iconStats"
                                                         src="img/icons/Health_regeneration_icon.png"></th>
-                                                <td>{{lifeRegen||'??'}}</td>
+                                                <td>{{lifeRegen||'???'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Mana_regeneration_icon.png">
                                                 </th>
-                                                <td>{{manaRegen||'??'}}</td>
+                                                <td>{{manaRegen||'???'}}</td>
                                                 <th><img class="iconStats" src="img/icons/Magic_resistance_icon.png">
                                                 </th>
-                                                <td>{{magicResistence||'??'}}</td>
+                                                <td>{{magicResistence||'???'}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -124,30 +132,30 @@
                                 <div class="row back-item">
                                     <div class="container text-center">
                                         <div class="row justify-content-center mb-1">
-                                            <button class="skillButton" data-toggle="modal" data-target="#exampleModal">
-                                                <img class="skillImg" ng-src="{{skillP||'img/Vayne_0.jpg'}}">
+                                            <button class="skillButton" data-toggle="modal" data-target="#exampleModal" ng-click="video('P')">
+                                                <img class="skillImg" ng-src="{{skillP||'img/skill-placeHolder.png'}}">
                                             </button>
                                         </div>
                                         <div class="row flex-gap">
                                             <div class="col-md-4 p-1">
-                                                <button class="skillButton" data-toggle="modal" data-target="#exampleModal">
-                                                    <img class="skillImg" ng-src="{{skillQ||'img/Vayne_0.jpg'}}">
+                                                <button class="skillButton" data-toggle="modal" data-target="#exampleModal" ng-click="video('Q')">
+                                                    <img class="skillImg" ng-src="{{skillQ||'img/skill-placeHolder.png'}}">
                                                 </button>
                                             </div>
                                             <div class="col-md-4 p-1">
-                                                <button class="skillButton" data-toggle="modal" data-target="#exampleModal">
-                                                    <img class="skillImg" ng-src="{{skillW||'img/Vayne_0.jpg'}}">
+                                                <button class="skillButton" data-toggle="modal" data-target="#exampleModal" ng-click="video('W')">
+                                                    <img class="skillImg" ng-src="{{skillW||'img/skill-placeHolder.png'}}">
                                                 </button>
                                             </div>
                                             <div class="col-md-4 p-1">
-                                                <button class="skillButton" data-toggle="modal" data-target="#exampleModal">
-                                                    <img class="skillImg" ng-src="{{skillE||'img/Vayne_0.jpg'}}">
+                                                <button class="skillButton" data-toggle="modal" data-target="#exampleModal" ng-click="video('E')">
+                                                    <img class="skillImg" ng-src="{{skillE||'img/skill-placeHolder.png'}}">
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="row justify-content-center mt-1">
-                                            <button class="skillButton" data-toggle="modal" data-target="#exampleModal">
-                                                <img class="skillImg" ng-src="{{skillR||'img/Vayne_0.jpg'}}">
+                                            <button class="skillButton" data-toggle="modal" data-target="#exampleModal" ng-click="video('R')">
+                                                <img class="skillImg" ng-src="{{skillR||'img/skill-placeHolder.png'}}">
                                             </button>
                                         </div>
                                     </div>
@@ -168,26 +176,26 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="skillTitle"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="display: flex; flex-direction: row-reverse;  border: none;">
-                    <h5 class="modal-title" id="exampleModalLabel" style="margin: 0 auto;">NOME DA SKILL</h5>
+                    <h5 class="modal-title" id="skillTitle" style="margin: 0 auto;">NOME DA SKILL</h5>
                     <button type="button" class="btn m-0 p-0" data-dismiss="modal" aria-label="Close" id="btn-circle" style="position: absolute;">
                         <i class="fa fa-times" aria-hidden="true" style="color: #dcbf59;"></i>
                     </button>
                 </div>
                 <div class="modal-body pt-3">
-                    <iframe width="100%" height="315" src="https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0142/ability_0142_W1.webm" frameborder="0" 
+                    <iframe width="100%" height="315" ng-src="{{trustSrc(preview)}}" frameborder="0"
                     allow="encrypted-media" allowfullscreen></iframe>
                 </div>
-                <div class="modal-footer text-center" style=" border: none;">
+                <div class="modal-footer text-center" style="border: none; display: flex; flex-direction: column;">
                     <div class="skillInfo" style="margin: 0 auto;">
-                        <img class="skillImg" ng-src="{{skillP||'img/Vayne_0.jpg'}}">
+                        <img class="skillImgModal" id="skillImage" ng-src="{{link||'img/skill-placeHolder.png'}}">
                     </div>
-                    <div>
-                        {{stripedHtml}}
+                    <div id="skillContent">
+                        
                     </div>
                     <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button> -->
@@ -202,7 +210,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-4">
-                            <img class="profilePicture" src="img/105080.png">
+                            <img class="profilePicture" src="img/glauco-icon.png">
                         </div>
                         <div class="col-md-4">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at pretium dui. Sed eros purus, ullamcorper sit amet nisi id, tristique malesuada ligula. Aliquam faucibus quis augue ac eleifend. Class.
@@ -292,8 +300,8 @@
                         <div class="col-md-4">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at pretium dui. Sed eros purus, ullamcorper sit amet nisi id, tristique malesuada ligula. Aliquam faucibus quis augue ac eleifend. Class.
                         </div>
-                        <div class="col-md-4">
-                            <img class="profilePicture" src="img/105080.png">
+                        <div class="col-md-4 p-0">
+                            <img class="profilePicture" src="img/batata_gordo.png">
                         </div>
                     </div>   
                 </div>
