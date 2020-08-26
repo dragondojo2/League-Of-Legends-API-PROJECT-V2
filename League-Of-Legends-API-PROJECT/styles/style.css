@@ -533,6 +533,7 @@ input:checked + .slider:before {
 
 .championName {
   margin: 0 auto;
+  padding-top: 2px;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;

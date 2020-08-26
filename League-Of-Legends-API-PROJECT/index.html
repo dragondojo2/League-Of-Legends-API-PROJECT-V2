@@ -26,11 +26,12 @@
     <div class="d-flex justify-content-center" style="display: inline-flex; flex-wrap: wrap; gap: 10px;">
         <span><img class="iconFlag" src="img/brasil.png"></span>
         <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" id="Checkbox" ng-click="obj2.checkboxFunc()">
             <span class="slider round"></span>
         </label>
         <span><img class="iconFlag" src="img/estados-unidos-da-america.png"></span>
     </div>
+
     <div class="container" id="CardGlobal" style="color: white;">
         <div class="row justify-content-center">
             <!-- Card 1 -->
@@ -42,7 +43,7 @@
                     <img class="card-img-top" ng-src={{splash||'img/splashArt-PlaceHolder.png'}} id="placeHolderImg">
                         <div class="card-block card-img-overlay">
                             <div class="card-header">
-                                <div class="d-flex viewBtn">
+                                <div class="d-flex viewBtn pr-5">
                                     <button type="button" class="btn" id="btn-circle" ng-click="viewOn()"
                                         ng-hide="displayOn">
                                         <i class="fa fa-eye" style="color: #dcbf59;"></i>
@@ -52,11 +53,11 @@
                                         <i class="fa fa-eye-slash" style="color: #dcbf59;"></i>
                                     </button>
                                 </div>
-                                <div class="championName remove">
+                                <div class="championName remove" id="championName">
                                     {{id}}
                                 </div>
                             </div>
-                            <div class="card-text remove">
+                            <div class="card-text remove" id="lore">
                                 {{lore}}
                             </div>
                             <div class="card-footer d-flex justify-content-between">

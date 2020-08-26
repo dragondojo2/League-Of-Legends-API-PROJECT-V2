@@ -1,11 +1,32 @@
 var app = angular.module('mainApp', []);
 
-app.controller('angularController', function ($scope, $http,$sce) {
+app.controller('angularController', function ($scope, $http,$sce,$location) {
 
     $scope.displayOn = false
     $scope.displayOff = true
     let count = 0
     $scope.total = 0
+    let language = "pt_BR"
+
+    $scope.obj2 = {
+        checkboxFunc:  function () { 
+            let checkbox = document.getElementById("Checkbox")
+            if (checkbox.checked === true){
+                language = "en_US"
+            }else{
+                language = "pt_BR"
+            }
+        }
+    }
+
+    $("#search").keypress(function(event){
+        var inputValue = event.charCode;
+        if(!(inputValue >= 65 && inputValue <= 122) && (inputValue != 32 && inputValue != 0)){
+            event.preventDefault();
+        }else if (inputValue >= 91 && inputValue <= 96) {
+            event.preventDefault();
+        }
+    });
 
     function padLeft(id, str){
         $scope.total = Array(4-String(id).length+1).join(str||'0')+id;
@@ -35,20 +56,33 @@ app.controller('angularController', function ($scope, $http,$sce) {
     }
     
     $scope.search = function (champion) {
+            let obj = {
+                lowerCase: this.champion.toLowerCase(),
+                upperCase: function () {
+                    let upperCase = this.lowerCase.charAt(0).toUpperCase() + (this.lowerCase.slice(1))
+                    return this.champion = upperCase
+                },
+            }
+
+            champion = obj.upperCase()
+
+            if (champion == "Nunu") {
+                document.getElementById("championName").style.fontSize = "2rem"
+                document.getElementById("championName").style.paddingTop = "9px"
+            }else{
+                document.getElementById("championName").style.fontSize = "2.3rem"
+                document.getElementById("championName").style.paddingTop = "2px"
+            }
+
         $http({
             method: 'GET',
-            url: 'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion/' + champion + '.json'
+            url: 'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/' + language + '/champion/' + champion + '.json'
         }).then(function sucessCallBack(response) {
-            console.log(response)
-            $scope.id = response.data.data[champion]["id"]
+            $scope.id = response.data.data[champion]["name"]
             let skinId = response.data.data[champion]["skins"][0]['id']
             let newIdValue = skinId/1000
 
-            const skillP = response.data.data[champion]["passive"]["image"]["full"]
-            const skillQ = response.data.data[champion]["spells"][0]["image"]["full"]
-            const skillW = response.data.data[champion]["spells"][1]["image"]["full"]
-            const skillE = response.data.data[champion]["spells"][2]["image"]["full"]
-            const skillR = response.data.data[champion]["spells"][3]["image"]["full"]
+            const [skillP, skillQ, skillW, skillE, skillR] = [response.data.data[champion]["passive"]["image"]["full"], response.data.data[champion]["spells"][0]["image"]["full"], response.data.data[champion]["spells"][1]["image"]["full"], response.data.data[champion]["spells"][2]["image"]["full"], response.data.data[champion]["spells"][3]["image"]["full"]]
             $scope.skillP = "http://ddragon.leagueoflegends.com/cdn/10.16.1/img/passive/" + skillP
             $scope.skillQ = "http://ddragon.leagueoflegends.com/cdn/10.16.1/img/spell/" + skillQ
             $scope.skillW = "http://ddragon.leagueoflegends.com/cdn/10.16.1/img/spell/" + skillW
@@ -93,11 +127,6 @@ app.controller('angularController', function ($scope, $http,$sce) {
                     document.getElementById('skillTitle').innerHTML = `${$scope.skillRName}`
                 }
                
-               
-               
-                
-                
-
                 padLeft(newIdValue)
                 $scope.preview = 'https://d28xe8vt774jo5.cloudfront.net/champion-abilities/'+ $scope.total +'/ability_'+ $scope.total + '_' + skill + '1.webm' 
         
@@ -151,5 +180,4 @@ app.controller('angularController', function ($scope, $http,$sce) {
         
         })
     }
-    
 });
