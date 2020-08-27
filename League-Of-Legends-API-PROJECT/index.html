@@ -23,10 +23,10 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-center" style="display: inline-flex; flex-wrap: wrap; gap: 10px;">
+    <div class="d-flex justify-content-center" style="display: inline-flex; flex-wrap: wrap; gap: 10px;" ng-hide="switch">
         <span><img class="iconFlag" src="img/brasil.png"></span>
         <label class="switch">
-            <input type="checkbox" id="Checkbox" ng-click="obj2.checkboxFunc()">
+            <input type="checkbox" id="Checkbox" ng-click="search()">
             <span class="slider round"></span>
         </label>
         <span><img class="iconFlag" src="img/estados-unidos-da-america.png"></span>
@@ -40,7 +40,9 @@
                     <!-- Card 1 Front -->
                     <div class="card front block shadow" style="border-color: #dcbf59;">
                         <div class="cover remove"></div>
-                    <img class="card-img-top" ng-src={{splash||'img/splashArt-PlaceHolder.png'}} id="placeHolderImg">
+                        <div id="blackScrenn" ng-hide="loadingSpinner"></div>
+                        <div class="loader" ng-hide="loadingSpinner"></div>
+                        <img class="card-img-top" ng-src={{splash||'img/splashArt-PlaceHolder.png'}} id="placeHolderImg" ng-hide="splashHide">
                         <div class="card-block card-img-overlay">
                             <div class="card-header">
                                 <div class="d-flex viewBtn pr-5">

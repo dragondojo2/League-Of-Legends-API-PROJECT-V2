@@ -1,23 +1,15 @@
 var app = angular.module('mainApp', []);
 
-app.controller('angularController', function ($scope, $http,$sce,$location) {
+app.controller('angularController', function ($scope, $http,$sce,$timeout) {
 
     $scope.displayOn = false
     $scope.displayOff = true
-    let count = 0
     $scope.total = 0
     let language = "pt_BR"
-
-    $scope.obj2 = {
-        checkboxFunc:  function () { 
-            let checkbox = document.getElementById("Checkbox")
-            if (checkbox.checked === true){
-                language = "en_US"
-            }else{
-                language = "pt_BR"
-            }
-        }
-    }
+    $scope.switch = true
+    $scope.carregando = true;
+    $scope.loadingSpinner = true
+    $scope.splashHide = false
 
     $("#search").keypress(function(event){
         var inputValue = event.charCode;
@@ -54,8 +46,18 @@ app.controller('angularController', function ($scope, $http,$sce,$location) {
         $scope.displayOff = true
         $scope.displayOn = false
     }
-    
-    $scope.search = function (champion) {
+
+    $scope.acabou = function (loadingSpinner) {
+        $scope.loadingSpinner = loadingSpinner
+        $timeout(function(){
+            $scope.loadingSpinner = true;
+            $scope.splashHide = false
+        }, 700);
+        console.log($scope.loadingSpinner);
+    }
+
+    $scope.search = function (champion) { 
+        let count = 0 
             let obj = {
                 lowerCase: this.champion.toLowerCase(),
                 upperCase: function () {
@@ -74,10 +76,23 @@ app.controller('angularController', function ($scope, $http,$sce,$location) {
                 document.getElementById("championName").style.paddingTop = "2px"
             }
 
+            $scope.checkboxFunc = () => {
+                let checkbox = document.getElementById("Checkbox")
+                if (checkbox.checked === true){
+                    return language = "en_US"
+                }else{
+                    return language = "pt_BR"
+                }
+            }
+
+            $scope.checkboxFunc()
+
         $http({
             method: 'GET',
             url: 'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/' + language + '/champion/' + champion + '.json'
         }).then(function sucessCallBack(response) {
+            $scope.switch = false
+
             $scope.id = response.data.data[champion]["name"]
             let skinId = response.data.data[champion]["skins"][0]['id']
             let newIdValue = skinId/1000
@@ -157,10 +172,15 @@ app.controller('angularController', function ($scope, $http,$sce,$location) {
                 let caminhoLength = response.data.data[champion]["skins"]
                 if (count>=(caminhoLength.length)){
                     count--
+                }else{
+                    $scope.splashHide = true
+                    $scope.acabou(false)
                 }
                 let caminho = response.data.data[champion]["skins"][count]
                 $scope.splash = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + champion + "_" + caminho.num + ".jpg"
             }
+
+            
 
             $scope.skinPrev = function () {
                 count --
@@ -180,4 +200,19 @@ app.controller('angularController', function ($scope, $http,$sce,$location) {
         
         })
     }
+
+    $scope.randomChampion = function (randomChampionArray) {
+        $http({
+            method: 'GET',
+            url: 'http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion.json'
+        }).then(function sucessCallBack(response){
+            const nameObj = response.data.data
+            const nameArray = Object.keys(nameObj)
+            console.log(nameArray);
+        }).then(function errorCallBack(response){
+
+        })
+    }
+
+    $scope.randomChampion()
 });
