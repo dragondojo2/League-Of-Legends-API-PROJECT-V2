@@ -14,7 +14,9 @@
 </head>
 
 <body ng-controller="angularController">
-    <div class="text-center pt-5"><img class="logo" src="img/logocerta.png"></div>
+    <div class="pt-5" style="display: flex; justify-content: center; align-items: center;">
+        <div class="text-center"><img class="logo" src="img/logocerta.png"></div>
+    </div>
 
     <div class="searchbarContainer">
         <div class="search-box">
@@ -26,11 +28,23 @@
     <div class="d-flex justify-content-center" style="display: inline-flex; flex-wrap: wrap; gap: 10px;" ng-hide="switch">
         <span><img class="iconFlag" src="img/brasil.png"></span>
         <label class="switch">
-            <input type="checkbox" id="Checkbox" ng-click="search()">
+            <input type="checkbox" id="Checkbox" ng-click="search(champion)">
             <span class="slider round"></span>
         </label>
         <span><img class="iconFlag" src="img/estados-unidos-da-america.png"></span>
     </div>
+
+    <div>
+        <audio ng-src="{{audioPath}}" id="audioCampeao"></audio>
+    </div>
+
+    <!-- <div class="container mt-4">
+        <div class="row justify-content-center">
+            <button type="button" class="btn" id="btn-circle">
+                <i class="fa fa-question" style="color: #dcbf59;"></i>
+            </button>
+        </div>
+    </div> -->
 
     <div class="container" id="CardGlobal" style="color: white;">
         <div class="row justify-content-center">
@@ -84,14 +98,21 @@
                         <div class="card-block card-img-overlay text-center">
                             <!-- <div class="card-header">{{name}}</div> -->
                             <div class="card-text2 m-0">
-                                <div>
-                                    <div class="d-flex viewBtn">
-                                        <button type="button" class="btn justify-content-start" id="btn-circle">
-                                            <i class="fa fa-volume-up" style="color: #dcbf59;"></i>
-                                        </button>
-                                    </div>
-                                    <div class="row back-item mt-5" id="iconBorder">
-                                        <img id="championIcon" ng-src={{icon||'img/icon-placeHolder.png'}}>
+                                <div class="container p-0">
+                                    <div class="row mt-2" style="display: flex; justify-content: space-between;">
+                                        <div class="mt-2 ml-2">
+                                            <button type="button" class="btn justify-content-start" id="btn-mute" ng-click="audioVolume()">
+                                                <i class="fa fa-volume-up" style="color: #dcbf59;" id="btn-mute-icon"></i>
+                                            </button>
+                                        </div>
+                                        <div class="" id="iconBorder">
+                                            <img id="championIcon" ng-src={{icon||'img/icon-placeHolder.png'}} style="margin-top: 40px !important; margin-bottom: 20px !important; display: flex;">
+                                        </div>
+                                        <div class="mt-2 mr-2">
+                                            <button type="button" class="btn justify-content-start" id="btn-circle" ng-click="audioPlay()">
+                                                <i class="fa fa-play" style="color: #dcbf59;"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row back-item containerIcon" style="background-color: pink;">
@@ -139,18 +160,18 @@
                                                 <img class="skillImg" ng-src="{{skillP||'img/skill-placeHolder.png'}}">
                                             </button>
                                         </div>
-                                        <div class="row flex-gap">
-                                            <div class="col-md-4 p-1">
+                                        <div class="row flex-gap" style="display: flex; justify-content: space-between;">
+                                            <div>
                                                 <button class="skillButton" data-toggle="modal" data-target="#exampleModal" ng-click="video('Q')">
                                                     <img class="skillImg" ng-src="{{skillQ||'img/skill-placeHolder.png'}}">
                                                 </button>
                                             </div>
-                                            <div class="col-md-4 p-1">
+                                            <div class="pl-1 pr-1">
                                                 <button class="skillButton" data-toggle="modal" data-target="#exampleModal" ng-click="video('W')">
                                                     <img class="skillImg" ng-src="{{skillW||'img/skill-placeHolder.png'}}">
                                                 </button>
                                             </div>
-                                            <div class="col-md-4 p-1">
+                                            <div>
                                                 <button class="skillButton" data-toggle="modal" data-target="#exampleModal" ng-click="video('E')">
                                                     <img class="skillImg" ng-src="{{skillE||'img/skill-placeHolder.png'}}">
                                                 </button>
@@ -181,7 +202,7 @@
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="skillTitle"
         aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" id="modalFull">
             <div class="modal-content">
                 <div class="modal-header" style="display: flex; flex-direction: row-reverse;  border: none;">
                     <h5 class="modal-title" id="skillTitle" style="margin: 0 auto;">NOME DA SKILL</h5>
@@ -190,8 +211,9 @@
                     </button>
                 </div>
                 <div class="modal-body pt-3">
-                    <iframe width="100%" height="315" ng-src="{{trustSrc(preview)}}" frameborder="0"
-                    allow="encrypted-media" allowfullscreen></iframe>
+                    <iframe width="100%" height="315" id="skillVideoContainer" ng-src="{{trustSrc(preview)||'img/no-ability-background.png'}}" frameborder="0"
+                    allow="encrypted-media" ng-hide="videoHide" allowfullscreen></iframe>
+                    <img class="noPassiva" src="img/no-ability-background.png" ng-hide="noSkill">
                 </div>
                 <div class="modal-footer text-center" style="border: none; display: flex; flex-direction: column;">
                     <div class="skillInfo" style="margin: 0 auto;">
@@ -210,103 +232,63 @@
     <footer class="site-footer">
         <div class="container">
             <div class="row text-center">
-                <div class="col-md-6">
+                <div class="col-md-6" id="footerBox">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6 p-0">
                             <img class="profilePicture" src="img/glauco-icon.png">
                         </div>
-                        <div class="col-md-4">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at pretium dui. Sed eros purus, ullamcorper sit amet nisi id, tristique malesuada ligula. Aliquam faucibus quis augue ac eleifend. Class.
-                        </div>
-                        <div class="col-md-4" style="border-right: 1px solid;">
-                            <table class="table table-sm table-borderless" id="tabbleFooter" style="color: white;">
-                                <tbody>
-                                    <tr>
-                                        <th scope="row" class="thFooter">
-                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_whatsapp_764566.png">
-                                        </th>
-                                        <td>Whatssap</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="thFooter">
-                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_instagram_six_black_107100.png">
-                                        </th>
-                                        <td>Instagram</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="thFooter">
-                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_facebook_six_black_107121.png">
-                                        </th>
-                                        <td>Facebook</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="thFooter">
-                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_linkedin_six_black_107094.png">
-                                        </th>
-                                        <td>Linkedin</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="thFooter">
-                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_github_six_black_107112.png">
-                                        <td>GitHub</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="col-md-6 footerText">
+                            Olá, meu nome é Glauco Lustosa e sou Desenvolvedor Full-Stack. Esse site foi construido com intuito de estudo com meu aluno, fiz parte do Design do site e Back-end nele contido. Sou amante da área de TI e relacionados e atualmente eu trabalho como Consultor de TI e procuro me expandir na área de Full-Stack Developer.                        </div>
+                        <div style="width: 100%;">
+                            <div class="footerSocialIcons pt-4" id="galucoMobile">
+                                <a href="https://api.whatsapp.com/send?phone=5511945311198&text=Oi%2C%20te%20contatei%20pelo%20seu%20site!!!" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_whatsapp_764566.png" alt=""></a>
+                                <a href="https://www.instagram.com/glauco.lustosa/" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_instagram_six_black_107100.png" alt=""></a>
+                                <a href="https://www.facebook.com/glauco.lustosa" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_facebook_six_black_107121.png" alt=""></a>
+                                <a href="https://www.linkedin.com/in/glauco-lustosa/" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_linkedin_six_black_107094.png" alt=""></a>
+                                <a href="https://github.com/McLovim" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_github_six_black_107112.png" alt=""></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
-                        <div class="col-md-4">
-                            <!-- <ul class="list-group list-group-flush" style="color: white;">
-                                <li class="list-group-item" id="removeBg"> <span> <img class="iconStats" src="img/icons/Attack_damage_icon.png"> </span>Facebook</li>
-                                <li class="list-group-item" id="removeBg"> <span> <img class="iconStats" src="img/icons/Attack_damage_icon.png"> </span>Twitter</li>
-                                <li class="list-group-item" id="removeBg"> <span> <img class="iconStats" src="img/icons/Attack_damage_icon.png"> </span>Instagram</li>
-                                <li class="list-group-item" id="removeBg"> <span> <img class="iconStats" src="img/icons/Attack_damage_icon.png"> </span>Linkedin</li>
-                                <li class="list-group-item" id="removeBg"> <span> <img class="iconStats" src="img/icons/Attack_damage_icon.png"> </span>GitHub</li>
-                            </ul> -->
-                            <table class="table table-sm table-borderless" id="tabbleFooter" style="color: white;">
-                                <tbody>
-                                    <tr>
-                                        <td class="socialText">Whatssap</td>
-                                        <th scope="row" class="thFooter">
-                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_whatsapp_764566.png">
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td class="socialText">Instagram</td>
-                                        <th scope="row" class="thFooter">
-                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_instagram_six_black_107100.png">
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td class="socialText">Facebook</td>
-                                        <th scope="row" class="thFooter">
-                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_facebook_six_black_107121.png">
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td class="socialText">Linkedin</td>
-                                        <th scope="row" class="thFooter">
-                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_linkedin_six_black_107094.png">
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td class="socialText">GitHub</td>
-                                        <th scope="row" class="thFooter">
-                                            <img class="iconSocial2" src="img/iconsFooter/iconfinder_github_six_black_107112.png">
-                                        </th>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="col-md-6 footerText" id="upperText">
+                                            Muito prazer, meu nome é João Gabriel e sou aprendiz na area de Web-Development. Esse site foi construido para representar meu progresso nesses ultimos meses, fiz tudo com auxilio do meu mentor. Sempre fui atraido pela da área de TI e relacionados, e esse foi o primeiro passo de muitos nessa carreira.
                         </div>
-                        <div class="col-md-4">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed at pretium dui. Sed eros purus, ullamcorper sit amet nisi id, tristique malesuada ligula. Aliquam faucibus quis augue ac eleifend. Class.
-                        </div>
-                        <div class="col-md-4 p-0">
+                        <div class="col-md-6 p-0">
                             <img class="profilePicture" src="img/batata_gordo.png">
                         </div>
+                        <div class="col-md-6 footerText" id="downText">
+                                            Muito prazer, meu nome é João Gabriel e sou aprendiz na area de Web-Development. Esse site foi construido para representar meu progresso nesses ultimos meses, fiz tudo com auxilio do meu mentor. Sempre fui atraido pela da área de TI e relacionados, e esse foi o primeiro passo de muitos nessa carreira.
+                        </div>
                     </div>   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" id="footerBox">
+                    <div class="footerSocialIcons pt-4" id="glaucoNormal">
+                        <a href="https://api.whatsapp.com/send?phone=5511945311198&text=Oi%2C%20te%20contatei%20pelo%20seu%20site!!!" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_whatsapp_764566.png" alt=""></a>
+                        <a href="https://www.instagram.com/glauco.lustosa/" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_instagram_six_black_107100.png" alt=""></a>
+                        <a href="https://www.facebook.com/glauco.lustosa" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_facebook_six_black_107121.png" alt=""></a>
+                        <a href="https://www.linkedin.com/in/glauco-lustosa/" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_linkedin_six_black_107094.png" alt=""></a>
+                        <a href="https://github.com/McLovim" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_github_six_black_107112.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="footerSocialIcons pt-4" id="batataNormal">
+                        <a href="https://api.whatsapp.com/send?phone=5511951169301&text=Oi%2C%20te%20contatei%20pelo%20seu%20site!!!" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_whatsapp_764566.png" alt=""></a>
+                        <a href="https://www.instagram.com/batatagordo/" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_instagram_six_black_107100.png" alt=""></a>
+                        <a href="https://www.instagram.com/batatagordo/" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_facebook_six_black_107121.png" alt=""></a>
+                        <a href="" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_linkedin_six_black_107094.png" alt=""></a>
+                        <a href="https://github.com/dragondojo2" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_github_six_black_107112.png" alt=""></a>
+                    </div>
+                    <div class="footerSocialIcons" id="batataMobile">
+                        <a href="https://api.whatsapp.com/send?phone=5511951169301&text=Oi%2C%20te%20contatei%20pelo%20seu%20site!!!" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_whatsapp_764566.png" alt=""></a>
+                        <a href="https://www.instagram.com/batatagordo/" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_instagram_six_black_107100.png" alt=""></a>
+                        <a href="https://www.instagram.com/batatagordo/" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_facebook_six_black_107121.png" alt=""></a>
+                        <a href="" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_linkedin_six_black_107094.png" alt=""></a>
+                        <a href="https://github.com/dragondojo2" target="_blank"><img class="iconsFooter" src="img/iconsFooter/iconfinder_github_six_black_107112.png" alt=""></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -318,25 +300,13 @@
             </div>
         </div>
         <div class="container">
-            <div class="row" style="margin: 0 100px;">
-                <div class="col-md-2">
+            <div class="row footerSocialIcons pb-3">
                     <img class="iconsFooter" src="img/iconsFooter/html-logo.png">
-                </div>
-                <div class="col-md-2">
                     <img class="iconsFooter" src="img/iconsFooter/sass-logo.png">
-                </div>
-                <div class="col-md-2">
                     <img class="iconsFooter" src="img/iconsFooter/js-logo.png">
-                </div>
-                <div class="col-md-2">
                     <img class="iconsFooter" src="img/iconsFooter/bootstrap-logo.png">
-                </div>
-                <div class="col-md-2">
                     <img class="iconsFooter" src="img/iconsFooter/api-logo.png">
-                </div>
-                <div class="col-md-2">
                     <img class="iconsFooter" src="img/iconsFooter/angularJS-logo.png">
-                </div>
             </div>
         </div>
     </footer>

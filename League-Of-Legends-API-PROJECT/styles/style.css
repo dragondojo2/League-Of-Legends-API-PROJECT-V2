@@ -699,8 +699,8 @@ iframe {
 }
 
 .iconsFooter {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 }
 
 .thFooter {
@@ -741,6 +741,37 @@ iframe {
   background-color: black;
 }
 
+#btn-mute {
+  border-color: #dcbf59;
+  background-color: #0c1718;
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42856;
+}
+
+.cardHeader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.noPassiva {
+  background-color: yellow;
+  outline: 3px solid #dcbf59;
+  outline-offset: -4px;
+}
+
 /* card-end */
 /* footer-start */
 .site-footer {
@@ -775,6 +806,40 @@ iframe {
 .site-footer a:hover {
   color: #3366cc;
   text-decoration: none;
+}
+
+.footerText {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#footerBox {
+  border-right: 1px solid !important;
+  margin-bottom: 0px !important;
+}
+
+#footerBox2 {
+  border-right: 1px solid !important;
+  margin-bottom: 0px !important;
+}
+
+.footerSocialIcons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 30px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .footer-links {
@@ -819,6 +884,18 @@ iframe {
   margin: 0;
 }
 
+#downText {
+  display: none;
+}
+
+#galucoMobile {
+  display: none;
+}
+
+#batataMobile {
+  display: none;
+}
+
 @media (max-width: 991px) {
   .site-footer [class^="col-"] {
     margin-bottom: 30px;
@@ -832,6 +909,41 @@ iframe {
   .site-footer .copyright-text,
   .site-footer .social-icons {
     text-align: center;
+  }
+  #footerBox {
+    border: none !important;
+  }
+  #footerBox2 {
+    border: none !important;
+  }
+  #upperText {
+    display: none;
+  }
+  #downText {
+    display: block;
+  }
+  #galucoMobile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-bottom: 50px;
+  }
+  #batataMobile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  #batataNormal {
+    display: none;
+  }
+  #glaucoNormal {
+    display: none;
+  }
+  .noPassiva {
+    width: 100%;
+  }
+  #modalFull {
+    margin-top: 30%;
   }
 }
 
@@ -911,8 +1023,28 @@ iframe {
 /* media */
 @media only screen and (max-width: 600px) {
   .logo {
-    max-height: 150px !important;
-    max-width: 90% !important;
+    width: 80%;
+    max-width: 400px !important;
+    height: auto;
+  }
+  .search-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 20vh;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 80%;
+    max-width: 400px !important;
+  }
+  .search-btn i {
+    font-size: 20px !important;
   }
 }
 
@@ -935,6 +1067,24 @@ iframe {
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
+  }
+}
+
+@media only screen and (min-width: 320px) {
+  #modalFull {
+    margin-top: 90px !important;
+  }
+  #skillVideoContainer {
+    width: 223px;
+    height: auto;
+  }
+  .modal-body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 /*# sourceMappingURL=style.css.map */
